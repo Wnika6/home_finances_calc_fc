@@ -75,10 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	incomeAddBtn.addEventListener('click', () => {
+		event.preventDefault()
 		checkTransaction('income')
 	})
 
 	expenseAddBtn.addEventListener('click', () => {
+		event.preventDefault()
 		checkTransaction('expense')
 	})
 

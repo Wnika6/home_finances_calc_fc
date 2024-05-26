@@ -17,20 +17,20 @@ body {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	gap: 1rem;
+	gap: 0.5rem;
 	padding: 1rem;
 	font-size: 2rem;
 	text-align: center;
 }
 
 .icon {
-	font-size: 4rem;
+	font-size: 3rem;
 }
 
 .transactions {
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 1.5rem;
 	margin-top: 1rem;
 }
 
