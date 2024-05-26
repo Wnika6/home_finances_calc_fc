@@ -1,0 +1,310 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 100vh;
+	font-family: 'Montserrat', sans-serif;
+	color: rgb(15, 15, 15);
+	background: rgb(246, 244, 244);
+	padding: 1rem;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.icon {
+	font-size: 4rem;
+}
+
+.transactions {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-top: 1rem;
+}
+
+.box {
+	padding: 1rem;
+	border-radius: 10px;
+	width: 100%;
+}
+
+.income-box {
+	background: linear-gradient(36deg, rgba(181, 215, 71, 1) 0%, rgba(154, 217, 162, 1) 100%);
+}
+
+.expense-box {
+	background: linear-gradient(36deg, rgba(235, 115, 115, 1) 0%, rgba(223, 161, 93, 1) 100%);
+}
+
+.area-header {
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+}
+
+.title {
+	text-align: center;
+	padding-bottom: 0.5rem;
+	font-size: 1.5rem;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.inputs input {
+	padding: 0.5rem;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	width: calc(50% - 0.5rem);
+}
+
+.add-btn {
+	padding: 0.5rem;
+	background: linear-gradient(36deg, rgb(161, 175, 176) 0%, rgb(222, 223, 227) 100%);
+	border: 2px solid rgb(106, 101, 101);
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgb(106, 101, 101);
+	cursor: pointer;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.list {
+	padding: 1.2rem;
+	border-radius: 10px;
+	background-color: #fff;
+	margin-bottom: 1rem;
+}
+
+.sum {
+	background-color: #fff;
+	padding: 0.5rem;
+	border-radius: 10px;
+}
+
+.list-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.3rem 0;
+	font-size: 1.2rem;
+	text-decoration: dotted;
+}
+
+.trans-btn {
+	padding: 0.3rem;
+	background: none;
+	border-radius: 5px;
+	border: 1px solid rgb(106, 101, 101);
+	box-shadow: 0 0 3px rgb(106, 101, 101);
+	cursor: pointer;
+}
+
+.panel-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+.edit-panel {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	min-height: 30%;
+	padding: 2rem;
+	border-radius: 10px;
+	background-color: rgb(220, 217, 217);
+}
+
+.edit-panel input {
+	width: 80%;
+	padding: 0.3rem;
+	margin: 0.5rem 0;
+	border-radius: 10px;
+	border: none;
+}
+
+.edit-panel button {
+	width: 6rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+	border: none;
+	transition: color 0.3s, transform 0.3s;
+}
+
+.edit-panel button:hover {
+	color: black;
+	background-color: white;
+	transform: scale(0.9);
+}
+
+.edit-buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+/* Media Queries for responsiveness */
+@media (min-width: 600px) {
+	.header {
+		font-size: 2.5rem;
+		gap: 1.5rem;
+	}
+
+	.icon {
+		font-size: 5rem;
+	}
+
+	.transactions {
+		flex-direction: row;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.box {
+		width: 45%;
+		padding: 0.8rem;
+	}
+
+	.title {
+		font-size: 1.8rem;
+	}
+
+	.inputs {
+		display: block;
+	}
+
+	.inputs input {
+		width: calc(60% - 0.5rem);
+	}
+
+	.add-btn {
+		margin-left: 1.5rem;
+	}
+	.list-item {
+		font-size: 1rem;
+	}
+	.sum {
+		font-size: 1rem;
+	}
+}
+
+@media (min-width: 768px) {
+	.header {
+		font-size: 3rem;
+		gap: 2rem;
+	}
+
+	.icon {
+		font-size: 6rem;
+	}
+
+	.transactions {
+		gap: 3rem;
+	}
+
+	.box {
+		padding: 2rem;
+	}
+
+	.title {
+		font-size: 2rem;
+	}
+
+	.inputs input {
+		width: calc(30% - 0.5rem);
+	}
+
+	.add-btn {
+		margin-left: 2rem;
+	}
+
+	.edit-panel {
+		width: 50%;
+		padding: 3rem;
+	}
+	.list-item {
+		font-size: 1.5rem;
+	}
+
+	.sum {
+		font-size: 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.header {
+		font-size: 3.5rem;
+		gap: 2.5rem;
+	}
+
+	.icon {
+		font-size: 7rem;
+	}
+
+	.transactions {
+		gap: 4rem;
+	}
+
+	.box {
+		padding: 2.5rem;
+	}
+
+	.title {
+        text-align:left;
+		font-size: 2.2rem;
+	}
+
+    .inputs {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+	.inputs input {
+		width: calc(25% - 0.5rem);
+	}
+
+	.add-btn {
+		margin-left: 2.5rem;
+	}
+
+	.edit-panel {
+		width: 40%;
+		padding: 3.5rem;
+	}
+
+    .trans-btn {
+        padding:  0.6rem 1rem;
+    }
+}

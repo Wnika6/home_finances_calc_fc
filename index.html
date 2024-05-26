@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>MyPiggy</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+		<title>Budżet domowy</title>
+		<link rel="stylesheet" href="style.css" />
+		<script src="https://kit.fontawesome.com/a734a8665c.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header class="header">
+			<i class="fa-solid fa-piggy-bank icon"></i>
+			<p class="available-means">Bilans wynosi zero</p>
+		</header>
+		<main>
+			<section class="transactions">
+				<div class="income-box box">
+					<div class="income-area area-header">
+						<h2 class="title">przychody</h2>
+						<div class="inputs">
+							<input type="text" id="income-name" placeholder="Nazwa przychodu" data-type="income" />
+							<input type="number" id="income-amount" placeholder="Kwota" data-type="income" />
+							<button class="income-add-btn add-btn" data-type="income">Dodaj</button>
+						</div>
+					</div>
+					<ul class="income-list list"></ul>
+					<p class="sum">Suma przychodów: <strong class="income-sum"></strong></p>
+				</div>
+				<div class="expense-box box">
+					<div class="expense-area area-header">
+						<h2 class="title">wydatki</h2>
+						<div class="inputs">
+							<input type="text" id="expense-name" placeholder="Nazwa wydatku" data-type="expense" />
+							<input type="number" id="expense-amount" placeholder="Kwota" data-type="expense" />
+							<button class="expense-add-btn add-btn" data-type="expense">Dodaj</button>
+						</div>
+					</div>
+					<ul class="expense-list list"></ul>
+					<p class="sum">Suma wydatków: <strong class="expense-sum"></strong></p>
+				</div>
+			</section>
+		</main>
+		<div class="panel-container">
+			<div class="edit-panel">
+				<label for="name-edit">Edytuj nazwę:</label>
+				<input type="text" id="name-edit" />
+				<label for="value-edit">Edytuj kwotę:</label>
+				<input type="number" id="value-edit" />
+				<div class="edit-buttons">
+					<button class="save-edit-btn">Zapisz</button>
+					<button class="cancel-edit-btn">Anuluj</button>
+				</div>
+			</div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>
