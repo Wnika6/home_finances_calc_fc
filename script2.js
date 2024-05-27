@@ -16,23 +16,30 @@ let incomeArr = []
 let expenseArr = []
 let uniqeId = 0
 
+const generateTransactionListItem = transaction => {
+	const { id, name, amount } = transaction
+	const type = incomeArr.includes(transaction) ? 'income' : 'expense'
+	return `
+      <li class="list-item">
+          <span class="${type}-name">${name}</span>
+          <span class="${type}-value">${amount} zł</span>
+          <div class="li-btns">
+              <button class="edit-btn new-transaction-btn" data-id="${id}">Edytuj</button>
+              <button class="delete-btn new-transaction-btn" data-id="${id}">Usuń</button>
+          </div>
+      </li>`
+}
+
+const renderTransactions = (transactions, listType) => {
+	const transactionListItems = transactions.map(generateTransactionListItem).join('')
+	listType.innerHTML = transactionListItems
+}
+
 const addNewTransaction = (name, amount, type) => {
 	const transaction = { id: uniqeId++, name, amount }
-	console.log(transaction)
-	const listItem = document.createElement('li')
-	listItem.classList.add('list-item')
-	listItem.innerHTML = `
-            <span class="${type}-name">${transaction.name}</span>
-            <span class="${type}-value">${transaction.amount} zł</span>
-            <div class="li-btns">
-                <button class="edit-btn new-transaction-btn" data-id="${transaction.id}">Edytuj</button>
-                <button class="delete-btn new-transaction-btn" data-id="${transaction.id}">Usuń</button>
-            </div>`
-
-	const listType = type === 'income' ? incomeList : expenseList
-	listType.appendChild(listItem)
-	const transactionArr = type == 'income' ? incomeArr : expenseArr
+	const transactionArr = type === 'income' ? incomeArr : expenseArr
 	transactionArr.push(transaction)
+	renderTransactions(transactionArr, type === 'income' ? incomeList : expenseList)
 	updateSums()
 }
 
@@ -84,6 +91,7 @@ const editTransaction = transaction => {
 	editPanel.style.display = 'flex'
 	editNameInput.value = transaction.name
 	editAmountInput.value = transaction.amount
+
 	editSaveBtn.onclick = () => {
 		const newName = editNameInput.value
 		const newAmount = editAmountInput.value
@@ -92,17 +100,25 @@ const editTransaction = transaction => {
 			transaction.amount = newAmount
 			updateSums()
 			editPanel.style.display = 'none'
-			const listItem = document.querySelector(`[data-id="${transaction.id}"]`).closest('.list-item')
 			const type = incomeArr.includes(transaction) ? 'income' : 'expense'
-			listItem.querySelector(`.${type}-name`).textContent = transaction.name
-			listItem.querySelector(`.${type}-value`).textContent = `${transaction.amount} zł`
+			updateTransactionListItem(transaction, type)
 		} else {
 			alert('Wypełnij oba pola')
 		}
 	}
+
 	editCancelBtn.addEventListener('click', () => {
 		editPanel.style.display = 'none'
 	})
+}
+
+const updateTransactionListItem = (transaction, type) => {
+	const listItem = document.querySelector(`[data-id="${transaction.id}"]`)
+	if (listItem) {
+		const listItemParent = listItem.closest('.list-item')
+		listItemParent.querySelector(`.${type}-name`).textContent = transaction.name
+		listItemParent.querySelector(`.${type}-value`).textContent = `${transaction.amount} zł`
+	}
 }
 
 const deleteTransaction = transaction => {
@@ -134,13 +150,17 @@ expenseAddBtn.addEventListener('click', () => {
 
 transactionsContianer.addEventListener('click', event => {
 	const target = event.target
-	const id = parseInt(target.getAttribute('data-id'))
-	const transaction = findTransactionByID(id)
-
-	if (transaction) {
-		if (target.classList.contains('edit-btn')) {
+	if (target.classList.contains('edit-btn')) {
+		const id = parseInt(target.getAttribute('data-id'))
+		const transaction = findTransactionByID(id)
+		if (transaction) {
 			editTransaction(transaction)
-		} else if (target.classList.contains('delete-btn')) {
+			console.log(transaction)
+		}
+	} else if (target.classList.contains('delete-btn')) {
+		const id = parseInt(target.getAttribute('data-id'))
+		const transaction = findTransactionByID(id)
+		if (transaction) {
 			deleteTransaction(transaction)
 		}
 	}

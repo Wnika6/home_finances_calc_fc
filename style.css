@@ -27,7 +27,7 @@ body {
 	font-size: 3rem;
 }
 
-.transactions {
+.transactions-container {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
@@ -48,12 +48,12 @@ body {
 	background: linear-gradient(36deg, rgba(235, 115, 115, 1) 0%, rgba(223, 161, 93, 1) 100%);
 }
 
-.area-header {
+.box-header {
 	margin-bottom: 1rem;
 	text-transform: uppercase;
 }
 
-.title {
+.box-title {
 	text-align: center;
 	padding-bottom: 0.5rem;
 	font-size: 1.5rem;
@@ -67,12 +67,12 @@ body {
 	gap: 0.5rem;
 }
 
-.inputs input {
+.input {
+	width: 40%;
 	padding: 0.5rem;
 	border-radius: 5px;
 	border: none;
 	text-align: center;
-	width: calc(50% - 0.5rem);
 }
 
 .add-btn {
@@ -87,16 +87,10 @@ body {
 }
 
 .list {
-	padding: 1.2rem;
+	padding: 0.8rem;
 	border-radius: 10px;
 	background-color: #fff;
 	margin-bottom: 1rem;
-}
-
-.sum {
-	background-color: #fff;
-	padding: 0.5rem;
-	border-radius: 10px;
 }
 
 .list-item {
@@ -104,12 +98,32 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.3rem 0;
-	font-size: 1.2rem;
-	text-decoration: dotted;
+	font-size: 1rem;
+	text-decoration: none;
 }
 
-.trans-btn {
+.income-name,
+.expense-name {
+	width: 30%;
+	overflow: scroll;
+}
+.income-value,
+.expense-value {
+	min-width: 20%;
+	overflow: scroll;
+	text-wrap: nowrap;
+}
+
+.li-btns {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.2rem;
+	width: 40%;
+}
+
+.new-transaction-btn {
 	padding: 0.3rem;
+	font-size: 0.7rem;
 	background: none;
 	border-radius: 5px;
 	border: 1px solid rgb(106, 101, 101);
@@ -117,6 +131,11 @@ body {
 	cursor: pointer;
 }
 
+.sum {
+	background-color: #fff;
+	padding: 0.5rem;
+	border-radius: 10px;
+}
 .panel-container {
 	position: absolute;
 	width: 100%;
@@ -140,7 +159,7 @@ body {
 	background-color: rgb(220, 217, 217);
 }
 
-.edit-panel input {
+.edit-panel-input {
 	width: 80%;
 	padding: 0.3rem;
 	margin: 0.5rem 0;
@@ -148,7 +167,7 @@ body {
 	border: none;
 }
 
-.edit-panel button {
+.panel-btn {
 	width: 6rem;
 	padding: 0.5rem;
 	margin: 0.5rem;
@@ -156,23 +175,15 @@ body {
 	background-color: black;
 	color: white;
 	border: none;
-	transition: color 0.3s, transform 0.3s;
 }
 
-.edit-panel button:hover {
-	color: black;
-	background-color: white;
-	transform: scale(0.9);
-}
-
-.edit-buttons {
+.panel-btns {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-top: 1rem;
 }
-
-/* Media Queries for responsiveness */
+/* Media queries */
 @media (min-width: 600px) {
 	.header {
 		font-size: 2.5rem;
@@ -183,7 +194,7 @@ body {
 		font-size: 5rem;
 	}
 
-	.transactions {
+	.transactions-container {
 		flex-direction: row;
 		justify-content: center;
 		gap: 1rem;
@@ -194,16 +205,15 @@ body {
 		padding: 0.8rem;
 	}
 
-	.title {
+	.box-title {
 		font-size: 1.8rem;
 	}
 
 	.inputs {
-		display: block;
-	}
-
-	.inputs input {
-		width: calc(60% - 0.5rem);
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
 	}
 
 	.add-btn {
@@ -211,6 +221,10 @@ body {
 	}
 	.list-item {
 		font-size: 1rem;
+	}
+
+	.new-transaction-btn {
+		padding: 0.6rem 1rem;
 	}
 	.sum {
 		font-size: 1rem;
@@ -227,7 +241,7 @@ body {
 		font-size: 6rem;
 	}
 
-	.transactions {
+	.transactions-container {
 		gap: 3rem;
 	}
 
@@ -235,12 +249,8 @@ body {
 		padding: 2rem;
 	}
 
-	.title {
+	.box-title {
 		font-size: 2rem;
-	}
-
-	.inputs input {
-		width: calc(30% - 0.5rem);
 	}
 
 	.add-btn {
@@ -251,8 +261,22 @@ body {
 		width: 50%;
 		padding: 3rem;
 	}
+	.panel-btn {
+		transition: color 0.3s, transform 0.3s;
+	}
+
+	.panel-btn:hover {
+		color: black;
+		background-color: white;
+		transform: scale(0.9);
+	}
+
 	.list-item {
-		font-size: 1.5rem;
+		font-size: 1.2rem;
+	}
+
+	.new-transaction-btn {
+		padding: 0.4rem 0.6rem;
 	}
 
 	.sum {
@@ -270,7 +294,7 @@ body {
 		font-size: 7rem;
 	}
 
-	.transactions {
+	.transactions-container {
 		gap: 4rem;
 	}
 
@@ -278,25 +302,13 @@ body {
 		padding: 2.5rem;
 	}
 
-	.title {
-        text-align:left;
+	.box-title {
+		text-align: left;
 		font-size: 2.2rem;
 	}
 
-    .inputs {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-	.inputs input {
-		width: calc(25% - 0.5rem);
-	}
-
 	.add-btn {
-		margin-left: 2.5rem;
+		margin-left: 1rem;
 	}
 
 	.edit-panel {
@@ -304,7 +316,11 @@ body {
 		padding: 3.5rem;
 	}
 
-    .trans-btn {
-        padding:  0.6rem 1rem;
-    }
+	.new-transaction-btn {
+		padding: 0.7rem 1rem;
+	}
+
+	.li-btns {
+		gap: 0.8rem;
+	}
 }
