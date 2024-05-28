@@ -1,13 +1,13 @@
-const incomeAddBtn = document.getElementById('income-add-btn')
-const expenseAddBtn = document.getElementById('expense-add-btn')
+const addIncomeBtn = document.getElementById('income-add-btn')
+const addExpenseBtn = document.getElementById('expense-add-btn')
 const availableMeans = document.getElementById('available-means')
 const sumIncomeDisplay = document.getElementById('income-sum')
 const sumExpenseDisplay = document.getElementById('expense-sum')
 const editPanel = document.getElementById('panel-container')
 const editNameInput = document.getElementById('name-edit')
 const editAmountInput = document.getElementById('value-edit')
-const editSaveBtn = document.getElementById('save-edit-btn')
-const editCancelBtn = document.getElementById('cancel-edit-btn')
+const saveEditBtn = document.getElementById('save-edit-btn')
+const cancelEditBtn = document.getElementById('cancel-edit-btn')
 const incomeList = document.getElementById('income-list')
 const expenseList = document.getElementById('expense-list')
 const transactionsContianer = document.getElementById('transactions-container')
@@ -18,22 +18,33 @@ let uniqeId = 0
 
 const addNewTransaction = (name, amount, type) => {
 	const transaction = { id: uniqeId++, name, amount }
-	console.log(transaction)
 	const listItem = document.createElement('li')
 	listItem.classList.add('list-item')
 	listItem.innerHTML = `
-            <span class="${type}-name">${transaction.name}</span>
-            <span class="${type}-value">${transaction.amount} zł</span>
-            <div class="li-btns">
-                <button class="edit-btn new-transaction-btn" data-id="${transaction.id}">Edytuj</button>
-                <button class="delete-btn new-transaction-btn" data-id="${transaction.id}">Usuń</button>
-            </div>`
-
+	<span class="${type}-name list-item-text">${transaction.name}</span>
+	<span class="${type}-value list-item-text">${transaction.amount} zł</span>
+	<div class="li-btns">
+	<button class="edit-btn li-btn" data-id="${transaction.id}">Edytuj</button>
+	<button class="delete-btn li-btn" data-id="${transaction.id}">Usuń</button>
+	</div>`
 	const listType = type === 'income' ? incomeList : expenseList
 	listType.appendChild(listItem)
 	const transactionArr = type == 'income' ? incomeArr : expenseArr
 	transactionArr.push(transaction)
 	updateSums()
+}
+function checkTransaction(type) {
+	const nameInput = type === 'income' ? document.getElementById('income-name') : document.getElementById('expense-name')
+	const amountInput =
+		type === 'income' ? document.getElementById('income-amount') : document.getElementById('expense-amount')
+
+	if (nameInput.value !== '' && amountInput.value !== '') {
+		addNewTransaction(nameInput.value, amountInput.value, type)
+		nameInput.value = ''
+		amountInput.value = ''
+	} else {
+		alert(`Wypełnij nazwę i kwotę ${type === 'income' ? 'przychodu' : 'wydatku'}`)
+	}
 }
 
 const calculateSum = transactions => {
@@ -57,20 +68,6 @@ const updateSums = () => {
 	}
 }
 
-function checkTransaction(type) {
-	const nameInput = type === 'income' ? document.getElementById('income-name') : document.getElementById('expense-name')
-	const amountInput =
-		type === 'income' ? document.getElementById('income-amount') : document.getElementById('expense-amount')
-
-	if (nameInput.value !== '' && amountInput.value !== '') {
-		addNewTransaction(nameInput.value, amountInput.value, type)
-		nameInput.value = ''
-		amountInput.value = ''
-	} else {
-		alert(`Wypełnij nazwę i kwotę ${type === 'income' ? 'przychodu' : 'wydatku'}`)
-	}
-}
-
 const findTransactionByID = id => {
 	let transaction
 	transaction = incomeArr.find(item => item.id === id)
@@ -84,7 +81,7 @@ const editTransaction = transaction => {
 	editPanel.style.display = 'flex'
 	editNameInput.value = transaction.name
 	editAmountInput.value = transaction.amount
-	editSaveBtn.onclick = () => {
+	saveEditBtn.onclick = () => {
 		const newName = editNameInput.value
 		const newAmount = editAmountInput.value
 		if (newName !== '' && newAmount !== '') {
@@ -100,34 +97,34 @@ const editTransaction = transaction => {
 			alert('Wypełnij oba pola')
 		}
 	}
-	editCancelBtn.addEventListener('click', () => {
+	cancelEditBtn.addEventListener('click', () => {
 		editPanel.style.display = 'none'
 	})
 }
 
 const deleteTransaction = transaction => {
-	const index = incomeArr.indexOf(transaction)
-	if (index !== -1) {
-		incomeArr.splice(index, 1)
+	const incomeTransactionIndex = incomeArr.indexOf(transaction)
+	if (incomeTransactionIndex !== -1) {
+		incomeArr.splice(incomeTransactionIndex, 1)
 		updateSums()
 		document.querySelector(`#income-list [data-id="${transaction.id}"]`).closest('.list-item').remove()
 		return
 	}
-	const index2 = expenseArr.indexOf(transaction)
-	if (index2 !== -1) {
-		expenseArr.splice(index2, 1)
+	const expenseTransactionIndex = expenseArr.indexOf(transaction)
+	if (expenseTransactionIndex !== -1) {
+		expenseArr.splice(expenseTransactionIndex, 1)
 		updateSums()
 		document.querySelector(`#expense-list [data-id="${transaction.id}"]`).closest('.list-item').remove()
 		return
 	}
 }
 
-incomeAddBtn.addEventListener('click', () => {
+addIncomeBtn.addEventListener('click', () => {
 	event.preventDefault()
 	checkTransaction('income')
 })
 
-expenseAddBtn.addEventListener('click', () => {
+addExpenseBtn.addEventListener('click', () => {
 	event.preventDefault()
 	checkTransaction('expense')
 })
