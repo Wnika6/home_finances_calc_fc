@@ -33,17 +33,19 @@ const addNewTransaction = (name, amount, type) => {
 	transactionArr.push(transaction)
 	updateSums()
 }
-function checkTransaction(type) {
+function validateTransactionInput(type) {
 	const nameInput = type === 'income' ? document.getElementById('income-name') : document.getElementById('expense-name')
 	const amountInput =
 		type === 'income' ? document.getElementById('income-amount') : document.getElementById('expense-amount')
 
-	if (nameInput.value !== '' && amountInput.value !== '') {
-		addNewTransaction(nameInput.value, amountInput.value, type)
+	if (nameInput.value === '') {
+		alert(`Wypełnij nazwę ${type === 'income' ? 'przychodu' : 'wydatku'}`)
+	} else if (isNaN(amountInput.value) || amountInput.value <= 0) {
+		alert('Kwota powinna zawierać liczbę większą od 0.')
+	} else {
+		addNewTransaction(nameInput.value.trim(), amountInput.value.trim(), type)
 		nameInput.value = ''
 		amountInput.value = ''
-	} else {
-		alert(`Wypełnij nazwę i kwotę ${type === 'income' ? 'przychodu' : 'wydatku'}`)
 	}
 }
 
@@ -121,12 +123,12 @@ const deleteTransaction = transaction => {
 
 addIncomeBtn.addEventListener('click', () => {
 	event.preventDefault()
-	checkTransaction('income')
+	validateTransactionInput('income')
 })
 
 addExpenseBtn.addEventListener('click', () => {
 	event.preventDefault()
-	checkTransaction('expense')
+	validateTransactionInput('expense')
 })
 
 transactionsContianer.addEventListener('click', event => {
