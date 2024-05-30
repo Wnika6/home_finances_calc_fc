@@ -19,13 +19,16 @@ body {
 	align-items: center;
 	text-align: center;
 	gap: 0.5rem;
-	padding: 1rem;
-	font-size: 1.5rem;
+	padding: 0 1rem;
 	overflow-wrap: break-word;
 }
 
 .icon {
 	font-size: 3rem;
+}
+
+.available-means {
+	font-size: 1.2rem;
 }
 
 .transactions-container {
@@ -51,13 +54,13 @@ body {
 
 .box-header {
 	margin-bottom: 1rem;
-	text-transform: uppercase;
 }
 
 .box-title {
 	text-align: center;
 	padding-bottom: 0.5rem;
 	font-size: 1.5rem;
+	text-transform: uppercase;
 }
 
 .inputs {
@@ -69,7 +72,7 @@ body {
 }
 
 .input {
-	width: 40%;
+	width: 60%;
 	padding: 0.5rem;
 	border-radius: 5px;
 	border: none;
@@ -87,6 +90,12 @@ body {
 	cursor: pointer;
 	font-weight: bold;
 	text-transform: uppercase;
+}
+
+.alert {
+	font-size: 0.8rem;
+	height: 2.2rem;
+	text-align: center;
 }
 
 .list {
@@ -193,6 +202,10 @@ body {
 		font-size: 5rem;
 	}
 
+	.available-means {
+		font-size: 1.5rem;
+	}
+
 	.transactions-container {
 		flex-direction: row;
 		justify-content: center;
@@ -238,6 +251,10 @@ body {
 
 	.icon {
 		font-size: 6rem;
+	}
+
+	.available-means {
+		font-size: 2rem;
 	}
 
 	.transactions-container {
@@ -287,10 +304,15 @@ body {
 	.header {
 		font-size: 3.5rem;
 		gap: 2.5rem;
+		padding: 1rem;
 	}
 
 	.icon {
 		font-size: 7rem;
+	}
+
+	.available-means {
+		font-size: 2.5rem;
 	}
 
 	.transactions-container {
@@ -304,6 +326,11 @@ body {
 	.box-title {
 		text-align: left;
 		font-size: 2.2rem;
+	}
+
+	.alert {
+		font-size: 1rem;
+		text-align: left;
 	}
 
 	.add-btn {

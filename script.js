@@ -1,6 +1,8 @@
 const addIncomeBtn = document.getElementById('income-add-btn')
 const addExpenseBtn = document.getElementById('expense-add-btn')
 const availableMeans = document.getElementById('available-means')
+const validationAlertIncome = document.getElementById('income-alert')
+const validationAlertExpense = document.getElementById('expense-alert')
 const sumIncomeDisplay = document.getElementById('income-sum')
 const sumExpenseDisplay = document.getElementById('expense-sum')
 const editPanel = document.getElementById('panel-container')
@@ -34,18 +36,19 @@ const addNewTransaction = (name, amount, type) => {
 	updateSums()
 }
 function validateTransactionInput(type) {
-	const nameInput = type === 'income' ? document.getElementById('income-name') : document.getElementById('expense-name')
-	const amountInput =
-		type === 'income' ? document.getElementById('income-amount') : document.getElementById('expense-amount')
+	const nameInput = document.getElementById(`${type}-name`)
+	const amountInput = document.getElementById(`${type}-amount`)
+	const validationAlertType = type === 'income' ? validationAlertIncome : validationAlertExpense
 
 	if (nameInput.value === '') {
-		alert(`Wypełnij nazwę ${type === 'income' ? 'przychodu' : 'wydatku'}`)
+		validationAlertType.textContent = `Wypełnij nazwę ${type === 'income' ? 'przychodu' : 'wydatku'}`
 	} else if (isNaN(amountInput.value) || amountInput.value <= 0) {
-		alert('Kwota powinna zawierać liczbę większą od 0.')
+		validationAlertType.textContent = 'Kwota powinna zawierać liczbę większą od 0.'
 	} else {
 		addNewTransaction(nameInput.value.trim(), amountInput.value.trim(), type)
 		nameInput.value = ''
 		amountInput.value = ''
+		validationAlertType.textContent = ''
 	}
 }
 
