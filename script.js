@@ -1,3 +1,5 @@
+// const incomeForm = document.getElementById('income-form')
+// const expenseForm = document.getElementById('expense-form')
 const addIncomeBtn = document.getElementById('income-add-btn')
 const addExpenseBtn = document.getElementById('expense-add-btn')
 const availableMeans = document.getElementById('available-means')
@@ -86,22 +88,26 @@ const editTransaction = transaction => {
 	editPanel.style.display = 'flex'
 	editNameInput.value = transaction.name
 	editAmountInput.value = transaction.amount
-	saveEditBtn.onclick = () => {
+	saveEditBtn.addEventListener('click', () => {
 		const newName = editNameInput.value
 		const newAmount = editAmountInput.value
 		if (newName !== '' && newAmount !== '') {
-			transaction.name = newName
-			transaction.amount = newAmount
-			updateSums()
-			editPanel.style.display = 'none'
-			const listItem = document.querySelector(`[data-id="${transaction.id}"]`).closest('.list-item')
-			const type = incomeArr.includes(transaction) ? 'income' : 'expense'
-			listItem.querySelector(`.${type}-name`).textContent = transaction.name
-			listItem.querySelector(`.${type}-value`).textContent = `${transaction.amount} zł`
+			if (parseFloat(newAmount) > 0) {
+				transaction.name = newName
+				transaction.amount = newAmount
+				updateSums()
+				editPanel.style.display = 'none'
+				const listItem = document.querySelector(`[data-id="${transaction.id}"]`).closest('.list-item')
+				const type = incomeArr.includes(transaction) ? 'income' : 'expense'
+				listItem.querySelector(`.${type}-name`).textContent = transaction.name
+				listItem.querySelector(`.${type}-value`).textContent = `${transaction.amount} zł`
+			} else {
+				alert('Kwota musi być większa od zera.')
+			}
 		} else {
-			alert('Wypełnij oba pola')
+			alert('Wypełnij oba pola. Kwota powinna zawierać wyłącznie cyfry.')
 		}
-	}
+	})
 	cancelEditBtn.addEventListener('click', () => {
 		editPanel.style.display = 'none'
 	})
@@ -123,6 +129,14 @@ const deleteTransaction = transaction => {
 		return
 	}
 }
+
+// const handleFormSubmit = (event, type) => {
+// 	event.preventDefault()
+// 	validateTransactionInput(type)
+// }
+
+// incomeForm.addEventListener('submit', event => handleFormSubmit(event, 'income'))
+// expenseForm.addEventListener('submit', event => handleFormSubmit(event, 'expense'))
 
 addIncomeBtn.addEventListener('click', () => {
 	event.preventDefault()

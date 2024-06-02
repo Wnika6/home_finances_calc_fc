@@ -19,9 +19,9 @@
 			<section class="transactions-container" id="transactions-container">
 				<div class="income-box box">
 					<div class="box-header">
-						<h2 class="box-title">przychody</h2>
+						<h1 class="box-title">przychody</h1>
 						<p class="alert" id="income-alert"></p>
-						<form class="inputs">
+						<form class="inputs" id="income-form">
 							<input
 								class="input"
 								type="text"
@@ -36,9 +36,6 @@
 								id="income-amount"
 								placeholder="Kwota"
 								data-type="income"
-								min="0.01"
-								,
-								step="0.01"
 								required
 								aria-label="Kwota przychodu" />
 							<button class="add-btn" id="income-add-btn" data-type="income">Dodaj</button>
@@ -49,9 +46,9 @@
 				</div>
 				<div class="expense-box box">
 					<div class="box-header">
-						<h2 class="box-title">wydatki</h2>
+						<h1 class="box-title">wydatki</h1>
 						<p class="alert" id="expense-alert"></p>
-						<form class="inputs">
+						<form class="inputs" id="expense-form">
 							<input
 								class="input"
 								type="text"
@@ -66,8 +63,6 @@
 								id="expense-amount"
 								placeholder="Kwota"
 								data-type="expense"
-								min="0.01"
-								step="0.01"
 								required
 								aria-label="Kwota wydatku" />
 							<button class="add-btn" id="expense-add-btn" data-type="expense">Dodaj</button>
@@ -83,7 +78,7 @@
 				<label for="name-edit">Edytuj nazwę:</label>
 				<input class="edit-panel-input" type="text" id="name-edit" />
 				<label for="value-edit">Edytuj kwotę:</label>
-				<input class="edit-panel-input" type="number" id="value-edit" />
+				<input class="edit-panel-input" type="number" id="value-edit" min="0.01" step="0.01" required />
 				<div class="panel-btns">
 					<button class="panel-btn" id="save-edit-btn">Zapisz</button>
 					<button class="panel-btn" id="cancel-edit-btn">Anuluj</button>
