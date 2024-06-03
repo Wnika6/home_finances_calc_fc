@@ -28,7 +28,6 @@
 								id="income-name"
 								placeholder="Nazwa przychodu"
 								data-type="income"
-								required
 								aria-label="Nazwa przychodu" />
 							<input
 								class="input"
@@ -36,7 +35,6 @@
 								id="income-amount"
 								placeholder="Kwota"
 								data-type="income"
-								required
 								aria-label="Kwota przychodu" />
 							<button class="add-btn" id="income-add-btn" data-type="income">Dodaj</button>
 						</form>
@@ -55,7 +53,6 @@
 								id="expense-name"
 								placeholder="Nazwa wydatku"
 								data-type="expense"
-								required
 								aria-label="Nazwa wydatku" />
 							<input
 								class="input"
@@ -63,7 +60,6 @@
 								id="expense-amount"
 								placeholder="Kwota"
 								data-type="expense"
-								required
 								aria-label="Kwota wydatku" />
 							<button class="add-btn" id="expense-add-btn" data-type="expense">Dodaj</button>
 						</form>
@@ -74,16 +70,18 @@
 			</section>
 		</main>
 		<div class="panel-container" id="panel-container">
-			<div class="edit-panel">
+			<form class="edit-panel" id="edit-panel-form" novalidate>
 				<label for="name-edit">Edytuj nazwę:</label>
 				<input class="edit-panel-input" type="text" id="name-edit" />
+				<p class="alert" id="edit-name-alert"></p>
 				<label for="value-edit">Edytuj kwotę:</label>
-				<input class="edit-panel-input" type="number" id="value-edit" min="0.01" step="0.01" required />
+				<input class="edit-panel-input" type="number" id="value-edit" min="0.01" step="0.01" />
+				<p class="alert" id="edit-amount-alert"></p>
 				<div class="panel-btns">
-					<button class="panel-btn" id="save-edit-btn">Zapisz</button>
-					<button class="panel-btn" id="cancel-edit-btn">Anuluj</button>
+					<button class="panel-btn" type="submit" id="save-edit-btn">Zapisz</button>
+					<button class="panel-btn" type="button" id="cancel-edit-btn">Anuluj</button>
 				</div>
-			</div>
+			</form>
 		</div>
 		<script src="script.js"></script>
 	</body>
